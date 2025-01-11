@@ -4,6 +4,7 @@ import { useUserStore } from '@/stores/user'
 import HomePage from '@/pages/HomePage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
 import ProfilePage from '@/pages/ProfilePage.vue'
+import MembersPage from '@/pages/MembersPage.vue'
 
 const routes = [
   {
@@ -24,6 +25,15 @@ const routes = [
       requiresAuth: true,
     },
   },
+  {
+    path: '/members',
+    name: 'members',
+    component: MembersPage,
+    meta: {
+      requiresAuth: true,
+      requiresPastor: true,
+    },
+  },
 ]
 
 const router = createRouter({
@@ -33,15 +43,16 @@ const router = createRouter({
 
 router.beforeEach((to, from, next) => {
   const user = useUserStore()
-  if (to.meta.requiresAuth) {
-    if (!user.user) {
-      next({ path: '/login' })
-    } else {
-      next()
-    }
-  } else {
-    next()
+
+  if (user.userLoaded && to.meta.requiresAuth && !user.isAuthenticated) {
+    next({ name: 'login' })
   }
+
+  if (user.userLoaded && to.meta.requiresPastor && !user.isPastor && !user.isAdmin) {
+    next({ name: 'profile' })
+  }
+
+  next()
 })
 
 export default router

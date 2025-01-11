@@ -8,8 +8,11 @@ const user = useUserStore()
 <template>
   <nav>
     <RouterLink to="/" active-class="active">Home</RouterLink>
-    <RouterLink v-if="user.isAuthenticated" to="/profile" active-class="active">Perfil</RouterLink>
-    <RouterLink v-if="user.isAuthenticated" to="/login" @click="user.handleLogout">Sair</RouterLink>
+    <nav v-if="user.isAuthenticated" class="authenticated">
+      <RouterLink to="/profile" active-class="active">Perfil</RouterLink>
+      <RouterLink v-if="user.isAdmin" to="/members" active-class="active">Membros</RouterLink>
+    </nav>
+    <RouterLink v-if="user.isAuthenticated" to="/login" @click="user.logOut">Sair</RouterLink>
     <RouterLink v-else to="/login" active-class="active">Entrar</RouterLink>
   </nav>
 </template>
@@ -35,6 +38,11 @@ nav {
 
   .active {
     color: #0f0;
+  }
+
+  .authenticated {
+    display: flex;
+    padding: 0;
   }
 }
 </style>
