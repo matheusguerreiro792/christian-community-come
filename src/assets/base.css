@@ -9,7 +9,27 @@
 :root {
   --white-color: #fff;
   --black-color: #000;
-  /* more colors... */
+  --red-color-10: hsl(0, 100%, 10%);
+  --red-color-20: hsl(0, 100%, 20%);
+  --red-color-30: hsl(0, 100%, 30%);
+  --red-color-40: hsl(0, 100%, 40%);
+  --red-color-50: hsl(0, 100%, 50%);
+  --red-color-60: hsl(0, 100%, 60%);
+  --red-color-70: hsl(0, 100%, 70%);
+  --red-color-80: hsl(0, 100%, 80%);
+  --red-color-90: hsl(0, 100%, 90%);
+  --red-color-95: hsl(0, 100%, 95%);
+  --gray-color-5: hsl(0, 0%, 5%);
+  --gray-color-10: hsl(0, 0%, 10%);
+  --gray-color-20: hsl(0, 0%, 20%);
+  --gray-color-30: hsl(0, 0%, 30%);
+  --gray-color-40: hsl(0, 0%, 40%);
+  --gray-color-50: hsl(0, 0%, 50%);
+  --gray-color-60: hsl(0, 0%, 60%);
+  --gray-color-70: hsl(0, 0%, 70%);
+  --gray-color-80: hsl(0, 0%, 80%);
+  --gray-color-90: hsl(0, 0%, 90%);
+  --gray-color-95: hsl(0, 0%, 95%);
 }
 
 /* semantic color variables for this project */

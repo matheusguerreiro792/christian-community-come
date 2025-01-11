@@ -12,11 +12,12 @@ header {
   justify-content: center;
   align-items: center;
   padding: 16px 0;
-  background-color: #500;
+  background-color: var(--red-color-20);
   color: var(--white-color);
 
   > h1 {
     font-size: 32px;
+    text-transform: uppercase;
   }
 }
 </style>

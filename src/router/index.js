@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { useProfileStore } from '@/stores/profile'
 
 import HomePage from '@/pages/HomePage.vue'
 import LoginPage from '@/pages/LoginPage.vue'
@@ -41,15 +42,24 @@ const router = createRouter({
   routes,
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const user = useUserStore()
+  const profile = useProfileStore()
 
-  if (user.userLoaded && to.meta.requiresAuth && !user.isAuthenticated) {
-    next({ name: 'login' })
+  await user.fetchAll()
+
+  if (profile.isAdmin || profile.isPastor) {
+    await profile.fetchProfiles()
   }
 
-  if (user.userLoaded && to.meta.requiresPastor && !user.isPastor && !user.isAdmin) {
-    next({ name: 'profile' })
+  if (to.meta.requiresAuth && !user.isAuthenticated) {
+    alert('Você Precisa estar Autenticado para Acessar esta Página.')
+    return next({ name: 'login' })
+  }
+
+  if (to.meta.requiresAuth && to.meta.requiresPastor && !profile.isPastor && !profile.isAdmin) {
+    alert('Somente Pastores podem Acessar essa Página.')
+    return next({ name: 'profile' })
   }
 
   next()

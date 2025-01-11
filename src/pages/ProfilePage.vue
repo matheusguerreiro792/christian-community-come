@@ -7,7 +7,7 @@ const user = useUserStore()
 
 <template>
   <main v-if="user.userLoaded">
-    <ProfileComponent :profile="user.profile" :email="user.user.email" />
+    <ProfileComponent :profile="user.fullUser.profile" :email="user.user.email" />
   </main>
 </template>
 
