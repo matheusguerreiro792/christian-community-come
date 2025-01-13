@@ -30,6 +30,26 @@
   --gray-color-80: hsl(0, 0%, 80%);
   --gray-color-90: hsl(0, 0%, 90%);
   --gray-color-95: hsl(0, 0%, 95%);
+  --green-color-10: hsl(120, 100%, 10%);
+  --green-color-20: hsl(120, 100%, 20%);
+  --green-color-30: hsl(120, 100%, 30%);
+  --green-color-40: hsl(120, 100%, 40%);
+  --green-color-50: hsl(120, 100%, 50%);
+  --green-color-60: hsl(120, 100%, 60%);
+  --green-color-70: hsl(120, 100%, 70%);
+  --green-color-80: hsl(120, 100%, 80%);
+  --green-color-90: hsl(120, 100%, 90%);
+  --green-color-95: hsl(120, 100%, 95%);
+  --yellow-color-10: hsl(60, 100%, 10%);
+  --yellow-color-20: hsl(60, 100%, 20%);
+  --yellow-color-30: hsl(60, 100%, 30%);
+  --yellow-color-40: hsl(60, 100%, 40%);
+  --yellow-color-50: hsl(60, 100%, 50%);
+  --yellow-color-60: hsl(60, 100%, 60%);
+  --yellow-color-70: hsl(60, 100%, 70%);
+  --yellow-color-80: hsl(60, 100%, 80%);
+  --yellow-color-90: hsl(60, 100%, 90%);
+  --yellow-color-95: hsl(60, 100%, 95%);
 }
 
 /* semantic color variables for this project */

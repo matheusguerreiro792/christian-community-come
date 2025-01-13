@@ -3,6 +3,7 @@ import { supabase } from '@/services/supabaseClient'
 import { handleError } from '@/utils/functions'
 
 import { useProfileStore } from './profile'
+import { useCellStore } from './cell'
 
 export const useUserStore = defineStore('user', {
   state: () => ({
@@ -78,9 +79,16 @@ export const useUserStore = defineStore('user', {
         await profileStore.fetchProfile(this.user.id)
       }
 
+      const cellStore = useCellStore()
+
+      if (profileStore.profile) {
+        await cellStore.fetchCell(profileStore.profile.cell_id)
+      }
+
       this.fullUser = {
         user: this.user,
         profile: profileStore.profile,
+        cell: cellStore.cell,
       }
     },
 
@@ -115,8 +123,9 @@ export const useUserStore = defineStore('user', {
       await this.fetchUser()
 
       const profileStore = useProfileStore()
+      const cellStore = useCellStore()
 
-      if (this.user && profileStore.profile && this.fullUser) {
+      if (this.user && profileStore.profile && cellStore.cell && this.fullUser) {
         this.userLoaded = true
       }
     },

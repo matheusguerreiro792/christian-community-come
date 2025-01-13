@@ -19,7 +19,7 @@ const handleLogin = async () => {
 </script>
 
 <template>
-  <form @submit.prevent="handleLogin">
+  <form class="login-form" @submit.prevent="handleLogin">
     <div class="email">
       <label for="email">Email:</label>
       <input
@@ -48,7 +48,7 @@ const handleLogin = async () => {
 </template>
 
 <style scoped>
-form {
+.login-form {
   display: flex;
   flex-direction: column;
   justify-content: center;

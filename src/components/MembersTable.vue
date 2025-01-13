@@ -13,6 +13,8 @@ const profiles = profileStore.profiles
         <th>Nome</th>
         <th>Telefone</th>
         <th>Papel</th>
+        <th class="center">Editar</th>
+        <th class="center">Remover</th>
       </tr>
     </thead>
     <tbody>
@@ -20,6 +22,8 @@ const profiles = profileStore.profiles
         <td>{{ profile.name }}</td>
         <td>{{ profile.phone }}</td>
         <td>{{ profile.role }}</td>
+        <td><i class="material-icons edit">edit</i></td>
+        <td><i class="material-icons delete">delete</i></td>
       </tr>
     </tbody>
   </table>
@@ -50,15 +54,39 @@ const profiles = profileStore.profiles
       > td {
         background-color: var(--gray-color-90);
         padding: 4px 16px;
+
+        > i {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          cursor: pointer;
+          width: fit-content;
+          margin: auto;
+        }
+
+        > i.edit {
+          &:hover {
+            color: var(--green-color-30);
+          }
+        }
+
+        > i.delete {
+          &:hover {
+            color: var(--red-color-40);
+          }
+        }
       }
 
       &:hover {
         > td {
           background-color: var(--white-color);
-          cursor: pointer;
         }
       }
     }
+  }
+
+  .center {
+    text-align: center;
   }
 }
 </style>
