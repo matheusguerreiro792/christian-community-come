@@ -47,6 +47,24 @@ export const useProfileStore = defineStore('profile', {
       this.profiles = data
     },
 
+    async createProfile(userId) {
+      if (!this.isAdmin || !this.isPastor) {
+        alert('Somente Pastores podem Criar Novos Perfis.')
+        return
+      }
+
+      const { data, error } = await supabase
+        .from('profiles')
+        .insert({ user_id: userId, name: 'Seu Nome', phone: '53999887766', role: 'member', cell_id: 'id-da-celula' })
+
+      if (error) {
+        handleError(error)
+        return
+      }
+
+      this.newProfile = data[0]
+    },
+
     cleanProfileStore() {
       this.profile = null
       this.newProfile = null

@@ -13,7 +13,7 @@ const handleLog = (log) => {
 const generatePassword = () => {
   const chars = '0123456789'
   let password = ''
-  for (let i = 0; i < 6; i++) {
+  for (let i = 0; i < 7; i++) {
     password += chars[Math.floor(Math.random() * chars.length)]
   }
   return password

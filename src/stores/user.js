@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { supabase } from '@/services/supabaseClient'
-import { handleError } from '@/utils/functions'
+import { handleError, generatePassword, handleLog } from '@/utils/functions'
+import { sendPasswordMail } from '@/services/brevoClient'
 
 import { useProfileStore } from './profile'
 import { useCellStore } from './cell'
@@ -16,7 +17,7 @@ export const useUserStore = defineStore('user', {
     isAuthenticated: (state) => !!state.user,
   },
   actions: {
-    async create(email, password, profileData, addressData) {
+    async createUser(email) {
       const profile = useProfileStore()
 
       if (!profile.isAdmin || !profile.isPastor) {
@@ -24,9 +25,11 @@ export const useUserStore = defineStore('user', {
         return
       }
 
+      const newPassword = generatePassword()
+
       const { data: userData, error: userError } = await supabase.auth.api.createUser({
         email,
-        password,
+        password: newPassword,
       })
 
       if (userError) {
@@ -34,33 +37,15 @@ export const useUserStore = defineStore('user', {
         return
       }
 
+      await sendPasswordMail(email, newPassword)
+
       this.newUser = userData?.user
 
       if (this.newUser) {
-        const { data: profileDataResult, error: profileError } = await supabase
-          .from('profiles')
-          .insert({ user_id: this.newUser.id, ...profileData })
-
-        if (profileError) {
-          handleError(profileError)
-          return
-        }
-
-        this.newProfile = profileDataResult[0]
+        await profile.createProfile(this.newUser.id)
       }
 
-      if (this.newProfile) {
-        const { data: addressDataResult, error: addressError } = await supabase
-          .from('addresses')
-          .insert({ user_id: this.newUser.id, ...addressData })
-
-        if (addressError) {
-          handleError(addressError)
-          return
-        }
-
-        this.newAddress = addressDataResult[0]
-      }
+      handleLog('Novo Membro Criado com Sucesso.')
     },
 
     async fetchUser() {
